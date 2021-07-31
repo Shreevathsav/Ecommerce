@@ -1,4 +1,6 @@
+import 'package:ecommerce/Models/Categories.dart';
 import 'package:ecommerce/Screens/navbar.dart';
+import 'package:ecommerce/Utilities/cathelper.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -10,6 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Category> cate = [];
+  @override
+  void initState() {
+    super.initState();
+    getCate();
+  }
+  getCate(){
+    cate = getCategory();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +33,8 @@ class _HomePageState extends State<HomePage> {
           
           elevation: 0,
         ),
-        body: Column(
+        body: SingleChildScrollView(child: 
+        Column(
           
           children: <Widget>[
             CarouselSlider(
@@ -41,23 +53,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.black,
                       width: 4.0,
                       style: BorderStyle.solid),
-                  //     boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.blueGrey,
-                  //     offset: const Offset(
-                  //       5.0,
-                  //       5.0,
-                  //     ),
-                  //     blurRadius: 10.0,
-                  //     spreadRadius: 2.0,
-                  //   ), //BoxShadow
-                  //   BoxShadow(
-                  //     color: Colors.white,
-                  //     offset: const Offset(0.0, 0.0),
-                  //     blurRadius: 0.0,
-                  //     spreadRadius: 0.0,
-                  //   ), //BoxShadow
-                  // ]
+                  
             ),
             child:Column(
             children: <Widget>[
@@ -94,11 +90,47 @@ class _HomePageState extends State<HomePage> {
             thickness: 5,
             
         ),
+        Container(
+          height: 20.0,
+          child: ListView.builder(
+            itemCount: cate.length,
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context,index){
+            return CategoryTile(
+              catN: cate[index].cat,
+              iconD: cate[index].icons,
+            );
+          }),
+        ),
+        Divider(
+         height: 20,
+            thickness: 5 
+        )
 
           ],
         ),
         
-      )
+      ))
       );
+  }
+}
+
+class CategoryTile extends StatelessWidget {
+  late final String catN;
+  final iconD;
+   CategoryTile({required this.catN,this.iconD});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left:10.0,right: 10.0),
+      child: Row(
+      children: <Widget>[
+        Icon(iconD),
+        SizedBox(width: 5.0,),
+        Text(catN,style: TextStyle(color: Colors.grey.shade900,fontSize: 15.0,fontWeight: FontWeight.bold),)
+      ],
+    ));
   }
 }
