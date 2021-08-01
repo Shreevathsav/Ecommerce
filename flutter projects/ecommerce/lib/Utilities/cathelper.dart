@@ -39,6 +39,5 @@ List<Category> getCategory(){
   categories.cat="Baby Products";
   categories.icons=Icons.baby_changing_station;
   category.add(categories);
-  print(category[0].cat);
   return category;
 }

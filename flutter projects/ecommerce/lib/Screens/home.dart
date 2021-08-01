@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             ),
             child:Column(
             children: <Widget>[
-              Image(image: AssetImage('images/sample.jpg'),),
+              Image(image: AssetImage('images/sample.jpg',),),
               SizedBox(
                 height: 15.0,
               ),
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
     );
   }).toList(),
 ),
-
+  SizedBox(height: 15.0,),
      
         Divider(
           height: 20,
@@ -106,7 +106,9 @@ class _HomePageState extends State<HomePage> {
         Divider(
          height: 20,
             thickness: 5 
-        )
+        ),
+        SizedBox(height: 20.0,),
+        Container(child: Text('Deals of the Day',style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.normal,),)),
 
           ],
         ),
@@ -123,7 +125,11 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+
+      },
+      child: Container(
       margin: EdgeInsets.only(left:10.0,right: 10.0),
       child: Row(
       children: <Widget>[
@@ -131,6 +137,6 @@ class CategoryTile extends StatelessWidget {
         SizedBox(width: 5.0,),
         Text(catN,style: TextStyle(color: Colors.grey.shade900,fontSize: 15.0,fontWeight: FontWeight.bold),)
       ],
-    ));
+    )));
   }
 }
